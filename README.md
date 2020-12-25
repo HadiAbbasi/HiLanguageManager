@@ -1,5 +1,5 @@
 # HiLanguageManager
-A Simple Qt tool for making Multi-Language Apps...
+A Simple Qt/QML tool for making Multi-Language Apps...
 
 Now it's possible to change qml text language immediately by switching between languages!
 
