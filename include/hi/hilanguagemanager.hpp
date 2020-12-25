@@ -35,13 +35,13 @@ class HiLanguageManager : public QObject
     Q_OBJECT
 public:
     Q_PROPERTY(QString  language READ getLanguage WRITE setLanguage NOTIFY languageChangedSi)
-    Q_PROPERTY(QString  immediate_changer READ getImmediate WRITE setImmediate NOTIFY languageChangedSi)
+    Q_PROPERTY(QString  immediate READ getImmediate WRITE setImmediate NOTIFY languageChangedSi)
     explicit HiLanguageManager(QString modelFileDir, QString language = "en", QObject *parent = nullptr);
     void setLanguage(QString lang);
     QString getLanguage() const;
     void setImmediate(QString immediate);
     QString getImmediate() const;
-    Q_INVOKABLE QString getStringByKey(QString key) const;
+    Q_INVOKABLE QString getString(QString key) const;
 signals:
     void languageChangedSi(QString);
 private:

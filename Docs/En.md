@@ -1,30 +1,12 @@
-# HiCalendar
+# HiLanguageManager
+A Simple Qt/QML tool for making Multi-Language Apps...
 
-![Language iso: C++](https://img.shields.io/badge/C%2B%2B-17-blue)
-![Version](https://img.shields.io/badge/Version-0.7-lightgrey)
-![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux%20%7C%20iOS%20%7C%20Android%20%7C%20Web-lightgrey)
+Now it's possible to change qml text language immediately by switching between languages!
 
-Hi Calendar Pro Component based on C++ and Qt Quick technology.
-
-It supports:
-    Us Georgian calendar    (weeks start with sunday).
-    Euro Georgian calendar  (weeks start with monday)
-    Persian Jalali calendar (weeks starts with saturday).
-
-# Description:
--------------------------------
-The project is still in its early stages and it may have some bugs and errors!
-
-**HiCalendarController::CalendarTypes contains these 3 types:**
-
-HiCalendarController::CalendarTypes::UsGeorgian
-HiCalendarController::CalendarTypes::EuroGeorgian
-HiCalendarController::CalendarTypes::Jalali
-
-As we need to renew calendar depended on user clendar type changing, there is a hicalendarcontext class which is the container for our main hicalendarcontroller!
-here is main.cpp codes on this example!
-
-```cpp
+```
+//main.cpp
+#include <iostream>
+using namespace std;
 #include <QApplication>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
@@ -32,56 +14,145 @@ here is main.cpp codes on this example!
 #include <QQmlContext>
 #include <QDebug>
 
-#include "assetsmanager.hpp"
-#include "include/hi/hicalendar.hpp"
-#include "include/common.hpp"
+#include "include/hi/hilanguagemanager.hpp"
+
+#define QML_REGISTER(classname,packagename,MAJORVERSION,minorversion) \
+qmlRegisterType<classname>(packagename, MAJORVERSION, minorversion, #classname);
+static QObject* create_singelton_object_LanguageTranslator(QQmlEngine *, QJSEngine *)
+{
+    return new HiLanguageManager(":/lang.json");
+}
 
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
 
-    QML_REGISTER(YearMonthDay,"hi",1,0)
-    QML_REGISTER(HiCalendarDayModel,"hi",1,0)
-    QML_REGISTER(HiCalendarController,"hi",1,0)
+   QML_REGISTER_SINGLETON(HiLanguageManager,"hi",1,0,create_singelton_object_LanguageTranslator)
+
     QQmlApplicationEngine engine;
-    HiCalendarContext* calendar_context = new HiCalendarContext();
-    QObject::connect(calendar_context,&HiCalendarContext::CalendarChangedSi,[calendar_context]()
-    {
-        QObject::connect(calendar_context->getCalendar(),&HiCalendarController::daySelectedSi,[]( HiCalendarDayModel* selected_day)
-        {
-            qDebug()<<"-------> "<<selected_day->toString();
-            //            selected_day->isToday();
-            //            selected_day->isDayOver();
-            //            selected_day->getJalaloDay();
-            //            selected_day->getJalaliMonth();
-            //            selected_day->getJalaliYear();
-            //            selected_day->getGeorgianDay();
-            //            selected_day->getGeorgianMonth();
-            //            selected_day->getGeorgianYear();
-            //            selected_day->getIslamicDay();
-            //            selected_day->getIslamicMonth();
-            //            selected_day->getIslamicYear();
-        });
-    });
-    calendar_context->renewCalendar(HiCalendarController::CalendarTypes::UsGeorgian);//
-    engine.rootContext()->setContextProperty("ASSETS", AssetsManager::getAssetsAddress(AssetsManager::file_asset));
-    engine.rootContext()->setContextProperty("calendar_context", QVariant::fromValue(calendar_context));
-    engine.load(QUrl(AssetsManager::getAssetsAddress(AssetsManager::qrc_asset,"hi/main.qml")));
+    engine.load(QUrl("qrc:/ui/main.qml"));
     if (engine.rootObjects().isEmpty())
         return -1;
-    
+    // QObject *item = engine.rootObjects()[0];
+
     return app.exec();
 }
 ```
 
-**Building**
-You need CMake or QMake tool for building source code based on Qt 5.15 series.
+This is our json file of languages dictionary which contains all our required multi-language texts categorised by languages name and all texts have unique key!
+you have to pass unique key to your textboxes + HiLanguageManager.immediate
+in this example we have to pass en|fa string for change in language!
 
-**Contribution**
-Bug fixes, docs, and enhancements welcome! Please let us know hadi.abbasi.programmer@gmail.com or kambiz.ceo@gmail.com
+```
+{
+    "en": {
+        "quit": "Quit",
+        "hello": "Hello",
+        "info": "Info",
+        "hello_world":"Hello World"
+    },
+    "fa": {
+        "quit": "خروج",
+        "hello": "سلام",
+        "info": "اطلاعات",
+        "hello_world":"سلام دنیا"
+    }
+}
+```
 
-**Screen Shots**
-![Image of Georgian 1](https://github.com/HadiAbbasi/HiCalendar/blob/main/Docs/Georgian-01.png)
-![Image of Georgian 2](https://github.com/HadiAbbasi/HiCalendar/blob/main/Docs/Georgian-02.png)
-![Image of Jalali](https://github.com/HadiAbbasi/HiCalendar/blob/main/Docs/Jalali.png)
+and this is our  simple QML file (main.qml):
+
+```
+import QtQuick 2.14
+import QtQuick.Window 2.14
+import QtQuick.Controls 2.14
+import QtQuick.Layouts 1.14
+import QtQuick.Dialogs 1.2
+
+import hi 1.0
+
+ApplicationWindow {
+    id: appRoot
+    title: "Hi Language Manager"
+
+    Button {
+        id: enBtn
+        text: "English Lang"
+        onClicked: {
+            HiLanguageManager.language = "en"
+        }
+    }
+
+    Button {
+        id:  faBtn
+        text: "زبان فارسی"
+        onClicked: {
+            HiLanguageManager.language = "fa"
+        }
+    }
+
+    Button {
+        id: showDialogBtn
+        text: HiLanguageManager.getString("hello") + HiLanguageManager.immediate
+        onClicked: {
+            messageDialog.show(HiLanguageManager.getString("hello_world")+HiLanguageManager.immediate)
+        }
+    }
+
+    Button {
+        id: quitBtn
+        text: HiLanguageManager.getString("quit")+HiLanguageManager.immediate
+        onClicked: {
+            Qt.quit();
+        }
+    }
+}
+
+```
+
+Be careful to change your text language immediately after switching between languages, you have to concat HiLanguageManager.immediate to your text!
+it's no matter where you concat it! so you can concat it at the begin or middle or end of your text!
+in this example, we have used this class as singleton class whitout any additional objects!
+
+for adding other languages, you have to edit lang.json:
+
+```
+{
+    "en": {
+        "hello": "Hello"
+    },
+    "fa": {
+        "hello": "سلام"
+    },
+    "ru": {
+         "hello": "Здравствуйте"
+    },
+    "arabic": {
+        "hello":"مرحبا"
+    }
+}
+```
+As you can see, hello is  the common key between all words mean the same thing. then you can switch between languages using:
+
+```
+//main.qml
+ApplicationWindow {
+    //..
+    //..
+    //..
+    Button {
+        id: changeLangBtn
+        onClicked {
+            HiLanguageManager.language = "fa"
+            //HiLanguageManager.language = "en"
+            //HiLanguageManager.language = "ru"
+            //HiLanguageManager.language = "arabic"
+        }
+    }
+    Text {
+        text: HiLanguageManager.getString("hello")+HiLanguageManager.immediate
+        //+HiLanguageManager.immediate will make immediate switching by click on changeLangBtn!
+    }
+}
+```

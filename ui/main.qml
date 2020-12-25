@@ -42,11 +42,11 @@ ApplicationWindow {
 
     Button {
         id: showDialogBtn
-        text: HiLanguageManager.getStringByKey("hello") + HiLanguageManager.immediate_changer
+        text: HiLanguageManager.getString("hello") + HiLanguageManager.immediate
         x: enBtn.x
         y:410
         onClicked: {
-            messageDialog.show(HiLanguageManager.getStringByKey("hello_world")+HiLanguageManager.immediate_changer)
+            messageDialog.show(HiLanguageManager.getString("hello_world")+HiLanguageManager.immediate)
         }
     }
 
@@ -54,7 +54,7 @@ ApplicationWindow {
         id: quitBtn
         x: faBtn.x
         y: 410
-        text: HiLanguageManager.getStringByKey("quit")+HiLanguageManager.immediate_changer
+        text: HiLanguageManager.getString("quit")+HiLanguageManager.immediate
         onClicked: {
             Qt.quit();
         }
@@ -63,7 +63,7 @@ ApplicationWindow {
     MessageDialog
     {
         id: messageDialog
-        title: HiLanguageManager.getStringByKey("info")+HiLanguageManager.immediate_changer
+        title: HiLanguageManager.getString("info")+HiLanguageManager.immediate
 
         function show(caption)
         {

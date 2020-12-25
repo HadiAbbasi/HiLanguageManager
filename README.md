@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 ```
 
 This is our json file of languages dictionary which contains all our required multi-language texts categorised by languages name and all texts have unique key!
-you have to pass unique key to your textboxes + HiLanguageManager.immediate_changer
+you have to pass unique key to your textboxes + HiLanguageManager.immediate
 in this example we have to pass en|fa string for change in language!
 
 ```
@@ -94,15 +94,15 @@ ApplicationWindow {
 
     Button {
         id: showDialogBtn
-        text: HiLanguageManager.getStringByKey("hello") + HiLanguageManager.immediate_changer
+        text: HiLanguageManager.getString("hello") + HiLanguageManager.immediate
         onClicked: {
-            messageDialog.show(HiLanguageManager.getStringByKey("hello_world")+HiLanguageManager.immediate_changer)
+            messageDialog.show(HiLanguageManager.getString("hello_world")+HiLanguageManager.immediate)
         }
     }
 
     Button {
         id: quitBtn
-        text: HiLanguageManager.getStringByKey("quit")+HiLanguageManager.immediate_changer
+        text: HiLanguageManager.getString("quit")+HiLanguageManager.immediate
         onClicked: {
             Qt.quit();
         }
@@ -111,7 +111,7 @@ ApplicationWindow {
 
 ```
 
-Be careful to change your text language immediately after switching between languages, you have to concat HiLanguageManager.immediate_changer to your text!
+Be careful to change your text language immediately after switching between languages, you have to concat HiLanguageManager.immediate to your text!
 it's no matter where you concat it! so you can concat it at the begin or middle or end of your text!
 in this example, we have used this class as singleton class whitout any additional objects!
 
@@ -151,8 +151,8 @@ ApplicationWindow {
         }
     }
     Text {
-        text: HiLanguageManager.getStringByKey("hello")+HiLanguageManager.immediate_changer
-        //+HiLanguageManager.immediate_changer will make immediate switching by click on changeLangBtn!
+        text: HiLanguageManager.getString("hello")+HiLanguageManager.immediate
+        //+HiLanguageManager.immediate will make immediate switching by click on changeLangBtn!
     }
 }
 ```

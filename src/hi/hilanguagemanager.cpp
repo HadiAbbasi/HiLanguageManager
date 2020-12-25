@@ -38,7 +38,7 @@ QString HiLanguageManager::getImmediate() const
     return _immediate;
 }
 
-QString HiLanguageManager::getStringByKey(QString key) const
+QString HiLanguageManager::getString(QString key) const
 {
     if (!_lang_json.isEmpty() && !_lang_json[_lang].isNull())
     {
