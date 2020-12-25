@@ -1,7 +1,7 @@
 # HiLanguageManager
-A Simple Qt/QML tool for making Multi-Language Apps...
+HiLanguageManager is A Simple Qt/QML utility for making Multi-Language Apps...
 
-Now it's possible to change qml text language immediately by switching between languages!
+Now it's possible to change qml texts language immediately by switching between languages!
 
 ```
 //main.cpp
@@ -40,9 +40,9 @@ int main(int argc, char *argv[])
 }
 ```
 
-This is our json file of languages dictionary which contains all our required multi-language texts categorised by languages name and all texts have unique key!
+This is our json file of languages dictionary which contains all our required multi-language texts categorised by languages name.
 you have to pass unique key to your textboxes + HiLanguageManager.immediate_changer
-in this example we have to pass en|fa string for change in language!
+in this example we have to pass en|fa name to make change in language!
 
 ```
 {
@@ -111,7 +111,7 @@ ApplicationWindow {
 
 ```
 
-Be careful to change your text language immediately after switching between languages, you have to concat HiLanguageManager.immediate_changer to your text!
+Be careful for change your text language immediately after switching between languages, you have to concat HiLanguageManager.immediate_changer to your text!
 it's no matter where you concat it! so you can concat it at the begin or middle or end of your text!
 in this example, we have used this class as singleton class whitout any additional objects!
 
@@ -152,7 +152,7 @@ ApplicationWindow {
     }
     Text {
         text: HiLanguageManager.getStringByKey("hello")+HiLanguageManager.immediate_changer
-        //+HiLanguageManager.immediate_changer will make immediate switching by click on changeLangBtn!
+        //+HiLanguageManager.immediate_changer will make immediate switching possible by click on changeLangBtn!
     }
 }
 ```
