@@ -1,0 +1,14 @@
+{
+    "en": {
+        "quit": "Quit",
+        "hello": "Hello",
+        "info": "Info",
+        "hello_world":"Hello World"
+    },
+    "fa": {
+        "quit": "خروج",
+        "hello": "سلام",
+        "info": "اطلاعات",
+        "hello_world":"سلام دنیا"
+    }
+}
