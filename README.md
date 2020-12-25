@@ -1,6 +1,7 @@
 # HiLanguageManager
 A Simple Qt tool for making Multi-Language Apps...
-now it's possible to change qml text language immediately by switching between languages!
+
+Now it's possible to change qml text language immediately by switching between languages!
 
 ```
 //main.cpp
@@ -39,7 +40,7 @@ int main(int argc, char *argv[])
 }
 ```
 
-this is our json file of languages dictionary which contains all multi-language texts categorised with languages simple name and all texts have unique key!
+This is our json file of languages dictionary which contains all our required multi-language texts categorised by languages name and all texts have unique key!
 you have to pass unique key to your textboxes + HiLanguageManager.immediate_changer
 in this example we have to pass en|fa string for change in language!
 
@@ -74,15 +75,10 @@ import hi 1.0
 ApplicationWindow {
     id: appRoot
     title: "Hi Language Manager"
-    visible: true
-    width: 700
-    height: 700
 
     Button {
         id: enBtn
         text: "English Lang"
-        x: appRoot.width/2 - enBtn.width-5
-        y:310
         onClicked: {
             HiLanguageManager.language = "en"
         }
@@ -91,8 +87,6 @@ ApplicationWindow {
     Button {
         id:  faBtn
         text: "زبان فارسی"
-        x: appRoot.width/2 + 5
-        y:310
         onClicked: {
             HiLanguageManager.language = "fa"
         }
@@ -101,8 +95,6 @@ ApplicationWindow {
     Button {
         id: showDialogBtn
         text: HiLanguageManager.getStringByKey("hello") + HiLanguageManager.immediate_changer
-        x: enBtn.x
-        y:410
         onClicked: {
             messageDialog.show(HiLanguageManager.getStringByKey("hello_world")+HiLanguageManager.immediate_changer)
         }
@@ -110,23 +102,9 @@ ApplicationWindow {
 
     Button {
         id: quitBtn
-        x: faBtn.x
-        y: 410
         text: HiLanguageManager.getStringByKey("quit")+HiLanguageManager.immediate_changer
         onClicked: {
             Qt.quit();
-        }
-    }
-
-    MessageDialog
-    {
-        id: messageDialog
-        title: HiLanguageManager.getStringByKey("info")+HiLanguageManager.immediate_changer
-
-        function show(caption)
-        {
-            messageDialog.text = caption;
-            messageDialog.open();
         }
     }
 }
@@ -134,8 +112,8 @@ ApplicationWindow {
 ```
 
 Be careful to change your text language immediately after switching between languages, you have to concat HiLanguageManager.immediate_changer to your text!
-it's not matter where you concat it! so you can concat it at the begin or middle or end of your text!
-in the example, we have used this class as singleton class whitout any additional objects!
+it's no matter where you concat it! so you can concat it at the begin or middle or end of your text!
+in this example, we have used this class as singleton class whitout any additional objects!
 
 for adding other languages, you have to edit lang.json:
 
@@ -155,7 +133,7 @@ for adding other languages, you have to edit lang.json:
     }
 }
 ```
-As you can see, hello is  the common key between all meaning words. then you can switch between languages using:
+As you can see, hello is  the common key between all words mean the same thing. then you can switch between languages using:
 
 ```
 //main.qml
@@ -178,4 +156,3 @@ ApplicationWindow {
     }
 }
 ```
-
