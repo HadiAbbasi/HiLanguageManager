@@ -1,7 +1,7 @@
 # HiLanguageManager
-A Simple Qt/QML tool for making Multi-Language Apps...
+این یک ابزار ساده برای ساخت نرم افزارهای چند زبانه تحت Qt/QML است.
 
-Now it's possible to change qml text language immediately by switching between languages!
+حالا تغییر سریع زبان نوشته های نرم افزارتان با سویچ روی زبان ممکن است.
 
 ```
 //main.cpp
@@ -40,9 +40,9 @@ int main(int argc, char *argv[])
 }
 ```
 
-This is our json file of languages dictionary which contains all our required multi-language texts categorised by languages name and all texts have unique key!
-you have to pass unique key to your textboxes + HiLanguageManager.immediate
-in this example we have to pass en|fa string for change in language!
+این فایل جسن ما است که به صورت گروه بندی زبانی شامل رشته های مختلف زبانی ما است.
+شما باید کلید واحد یک رشته که مشترک بین تمام زبانها است را به همراه HiLanguageManager.immediate ست کنید.
+در این مثال ما باید کلمه کلیدی fa |en را برای سویچ زبان پاس کنیم.
 
 ```
 {
@@ -61,8 +61,7 @@ in this example we have to pass en|fa string for change in language!
 }
 ```
 
-and this is our  simple QML file (main.qml):
-
+و این کد هم کد QML (main.qml) است.
 ```
 import QtQuick 2.14
 import QtQuick.Window 2.14
@@ -111,11 +110,12 @@ ApplicationWindow {
 
 ```
 
-Be careful to change your text language immediately after switching between languages, you have to concat HiLanguageManager.immediate to your text!
-it's no matter where you concat it! so you can concat it at the begin or middle or end of your text!
-in this example, we have used this class as singleton class whitout any additional objects!
+در جریان باشید که برای تغییر سریع نوشته هایتان با سویچ زبان، باید در ابتدا یا وسط یا انتهای آن، HiLanguageManager.immediate را کانکت کنید.
+اینکه در ابتدا یا وسط یا انتهایش بیفزایید مهم نیست.
+در مثال ما، این کلاس به صورت سینگلتن استفاده شده تا نیاز به نمونه سازی چند گانه از آن نباشد.
 
-for adding other languages, you have to edit lang.json:
+
+برای افزودن زبانهای اضافی باید lang.json را ویرایش کنید.
 
 ```
 {
@@ -133,7 +133,7 @@ for adding other languages, you have to edit lang.json:
     }
 }
 ```
-As you can see, hello is  the common key between all words mean the same thing. then you can switch between languages using:
+همانطوری که مشاهده می فرمایید، واژه hello کلید مشترک بین تمام هم معنی هایش در زبانهای مختلف است. می توانید به صورت زیر بین زبانهای مختلف سویچ کنید.
 
 ```
 //main.qml
@@ -152,7 +152,7 @@ ApplicationWindow {
     }
     Text {
         text: HiLanguageManager.getString("hello")+HiLanguageManager.immediate
-        //+HiLanguageManager.immediate will make immediate switching by click on changeLangBtn!
+        //+HiLanguageManager.immediate will make immediate switching possible by click on changeLangBtn!
     }
 }
 ```
