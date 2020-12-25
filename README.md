@@ -11,7 +11,6 @@ using namespace std;
 #include <QQmlContext>
 #include <QDebug>
 
-#include "include/common.hpp"
 #include "include/hi/hilanguagemanager.hpp"
 
 #define QML_REGISTER(classname,packagename,MAJORVERSION,minorversion) \
