@@ -25,17 +25,17 @@
     || defined(__WIN32) || defined(__WIN32__) || defined(WIN64) || defined(_WIN64) \
     || defined(__WIN64) || defined(__WIN64__)
 //!Microsoft Windows
-#define HI_CALENDAR_EXPORT __declspec(dllexport)
-#define HI_CALENDAR_IMPORT __declspec(dllimport)
+#define HI_LANGUAGE_EXPORT __declspec(dllexport)
+#define HI_LANGUAGE_IMPORT __declspec(dllimport)
 #elif defined(__GNUC__)
 //!Define for Unix base OS such as: Linux, macOS, FreeBSD, etc...
-#define HI_CALENDAR_EXPORT __attribute__((visibility("default")))
-#define HI_CALENDAR_IMPORT __attribute__((visibility("default")))
+#define HI_LANGUAGE_EXPORT __attribute__((visibility("default")))
+#define HI_LANGUAGE_IMPORT __attribute__((visibility("default")))
 #define KAVENEGAR_HIDDEN __attribute__((visibility("hidden")))
 #else
 //  do nothing and hope for the best?
-#define HI_CALENDAR_EXPORT
-#define HI_CALENDAR_IMPORT
+#define HI_LANGUAGE_EXPORT
+#define HI_LANGUAGE_IMPORT
 #pragma warning Unknown dynamic link import / export semantics.
 #endif
 
