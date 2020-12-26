@@ -1,4 +1,7 @@
 # HiLanguageManager
+![Language iso: C++]
+![Version](https://img.shields.io/badge/Version-1.0-lightgrey)
+![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux%20%7C%20iOS%20%7C%20Android%20%7C%20Web-lightgrey)
 HiLanguageManager is A Simple Qt/QML utility for making Multi-Language Apps...
 
 Now it's possible to change qml texts language immediately by switching between languages!
