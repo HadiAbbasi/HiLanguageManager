@@ -1,6 +1,4 @@
 # HiLanguageManager
-![Language iso: C++](https://img.shields.io/badge/C%2B%2B-17-blue)
-![Version](https://img.shields.io/badge/Version-0.7-lightgrey)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux%20%7C%20iOS%20%7C%20Android%20%7C%20Web-lightgrey)
 
 Now it's possible to change qml texts language immediately by switching between languages!
